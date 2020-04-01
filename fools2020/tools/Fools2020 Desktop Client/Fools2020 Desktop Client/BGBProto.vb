@@ -38,7 +38,7 @@ Public Class BGBProto
         Dim body = System.Convert.ToBase64String(data.ToArray())
         Dim cli As New Net.WebClient
         Try
-            Dim resp = cli.UploadString("http://127.0.0.1:20111/req/" & SessionID, body)
+            Dim resp = cli.UploadString("http://fools2020.stranck.ovh:20111/req/" & SessionID, body)
             Dim resparr = System.Convert.FromBase64String(resp)
             data.Clear()
             For Each b In resparr
