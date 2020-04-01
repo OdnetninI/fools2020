@@ -1,6 +1,9 @@
 import os
 import sys
 
+if not os.path.exists("bin/"):
+    os.mkdir("bin/")
+
 try:
     import rgbbin.objfile
 except:
@@ -88,8 +91,8 @@ with open('fools.sav', 'wb') as fp:
 
 print("writing bgb savestate...")
 
-source = r'W:\bgb\red.sn3'
-target = r'W:\bgb\red.sn2'
+source = r'../bgb/red.sn3'
+target = r'../bgb/red.sn2'
 
 print("creating bgb state to %s" % target)
 
