@@ -24,7 +24,7 @@ Public Class Form1
         Try
             Dim cli As New Net.WebClient
             Dim body = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(TextBox1.Text)) & "|" & System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(TextBox2.Text))
-            Dim resp = cli.UploadString("http://fools2020.stranck.ovh:20111/login/", body)
+            Dim resp = cli.UploadString("http://fools2020.stranck.ovh:8080/login/", body)
             If resp = "INVAL" Then
                 MsgBox("Invalid username and/or password.")
                 Button1.Enabled = True
