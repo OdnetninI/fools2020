@@ -42,7 +42,7 @@ movementpattern = NONE
 textid = 0x01
 
 [Object_0]
-pictureid = SPRITE_RIVAL
+pictureid = SPRITE_BLUE
 x = 4
 y = 2
 movement = STAY
