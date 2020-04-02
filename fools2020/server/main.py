@@ -128,11 +128,8 @@ def appRequest(environ, start_response):
     if q != None:
         sessid = q["sessid"]
         return [bytes(sessid, "ascii")]
-<<<<<<< HEAD
     else:
         return [b"INVAL"]
-=======
->>>>>>> 80c98e10fcef5d04ed36035f47c4edff5d43df4f
 
 @rt.route("^.*$")
 def appDefault(environ, start_response):
