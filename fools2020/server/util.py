@@ -123,8 +123,18 @@ def checkUserLogin(user, password):
     if q:
         q = q[0]
         pw = q["password"].split("$")
+<<<<<<< HEAD
         h = password_hash(password, salt=pw[0])
         if(h == q["password"]):
+=======
+        #print("0", pw[0])
+        #print("1", pw[1])
+        #print("q", q["password"])
+        h = password_hash(password, salt=pw[0])
+        #print("h", h)
+        if(h == q["password"]):
+            #print("CORRECT")
+>>>>>>> 80c98e10fcef5d04ed36035f47c4edff5d43df4f
             print("Login confirmed for user", user)
             return q
     print("Login failed for user", user)
@@ -136,6 +146,11 @@ def password_hash(x, salt=None):
         salt = os.urandom(SALT_SIZE)
     else:
         salt = bytes.fromhex(salt)
+<<<<<<< HEAD
+=======
+    #print("salt:", salt.hex())
+    #print("--pw:", x)
+>>>>>>> 80c98e10fcef5d04ed36035f47c4edff5d43df4f
     return salt.hex() + "$" + hashlib.pbkdf2_hmac('sha256', bytes(x, 'utf-8') + PEPPER, salt, 100000).hex()
 
 def new_session_key():

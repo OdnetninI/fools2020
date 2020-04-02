@@ -1,0 +1,11 @@
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\bin\Release\Fools2020 Desktop Client.exe
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\bin\Release\Fools2020 Desktop Client.pdb
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\bin\Release\Fools2020 Desktop Client.xml
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020 Desktop Client.vbprojAssemblyReference.cache
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020_Desktop_Client.Form1.resources
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020_Desktop_Client.Resources.resources
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020 Desktop Client.vbproj.GenerateResource.cache
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020 Desktop Client.vbproj.CoreCompileInputs.cache
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020 Desktop Client.exe
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020 Desktop Client.xml
+C:\Users\Stran\Desktop\Fools2020 Desktop Client\obj\Release\Fools2020 Desktop Client.pdb
