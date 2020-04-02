@@ -19,7 +19,7 @@ X_Objects:
     hdr_signpost        4, 4, $03
     hdr_object_count    2
     hdr_object          SPRITE_LASS, 7, 2, STAY, NONE, $01
-    hdr_object          SPRITE_RIVAL, 4, 2, STAY, NONE, $01
+    hdr_object          SPRITE_RIVAL, 4, 2, STAY, NONE, $04
 
 X_RAMScript:
     hdr_textptrs        $fea0,$fea1,$fea2
