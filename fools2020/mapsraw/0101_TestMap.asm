@@ -22,7 +22,7 @@ X_Objects:
     hdr_object          SPRITE_RIVAL, 4, 2, STAY, NONE, $04
 
 X_RAMScript:
-    hdr_textptrs        $fea0,$fea1,$fea2
+    hdr_textptrs        $fea0,$fea1,$fea2,$fea3
     rs_end
 
 X_Blocks:
