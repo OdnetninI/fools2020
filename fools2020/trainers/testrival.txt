@@ -1,0 +1,30 @@
+[Trainer]
+Name = McDick Fartface
+Class = RIVAL1
+RewardBP = 1
+RewardCredits = 10
+MonSpecies = SQUIRTLE
+
+[Moveset]
+Move1 = TACKLE
+Move2 = GROWL
+Move3 = .
+Move4 = .
+
+[Tactics]
+DefaultMove = 1
+OpeningMove = 2
+OnLowHealth = 1
+OnOwnStatusEffect = 0
+OnEnemyLowHealth = 1
+OnEnemyStatusEffect = 0
+
+[Inventory]
+Slot1 = NONE
+Slot2 = NONE
+Slot3 = NONE
+Slot4 = NONE
+Slot5 = NONE
+Slot6 = NONE
+Slot7 = NONE
+Slot8 = NONE
