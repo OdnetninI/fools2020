@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<title>Login - Tactical showdown: TheZZAZZGlitch's April Fools Event 2020</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src='script.js'></script>
+<script>
+    function login(e){
+        loaderStart(e, []);
+        var req = $.post(API_SERVER + "/login/", {
+            "username": $("#username").val(),
+            "password": $("#pass").val()
+        });
+        req.fail(function(){
+            modalMessage("Could not connect to the event server. Try again in a few minutes.");
+            loaderFinish();
+        });
+        req.done(function(x){
+            if (x['success']){
+                window.localStorage.setItem("sessid", x['sessid']);
+                window.location = "faq.html";
+            }else{
+                modalMessage("An error occured: " + x['message']);
+                loaderFinish();
+            }
+        });
+    }
+    
+    $(document).ready(function(){
+        $('.f-form-field').keypress(function(e){
+            if (e.which == 13){
+                $('.f-form-field').blur();
+                e.preventDefault();
+                $("#login-btn")[0].click();
+                return false;
+            }
+        });
+    });
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Fools2020</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            {% if g.session.username %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Play</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Inventory (0)</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Reports (0)</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Rankings</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out ({{ g.session.username }})</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log In</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="https://fools2018.stranck.ovh">Fools2018</a></li>
+            <li class="nav-item"><a class="nav-link" href="https://fools2019.stranck.ovh">Fools2019</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="navbar-spacing"></div>
+
+<div id="content">
+    <div class="f-container panel panel-default">
+        <div class="f-category">
+            Log in
+        </div>
+        <div class="f-inside-padded">
+            <input type='text' class='form-control f-form-field' placeholder='Username' maxlength="20" id='username'>
+            <input type='password' class='form-control f-form-field' placeholder='Password' id='pass'>
+            <button class="btn btn-success" onclick="login(this)" id="login-btn">
+                Log in
+            </button>
+        </div>
+    </div>
+    
+    <div class="f-container panel panel-default">
+        <div class="f-single-line">
+            Don't have an account yet? <a href='register.html'>Register here</a>.
+        </div>
+    </div>
+</div>

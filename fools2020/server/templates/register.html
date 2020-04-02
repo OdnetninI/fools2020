@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<title>Register - Glitch Islands: TheZZAZZGlitch's April Fools Event 2019</title>
+<meta name="viewport" content="width=device-width">
+
+<meta name="description" content="Welcome to Fools2020: Tacnical showdown! Want to play Fools2020? Regist an account for free before!">
+<meta name="keywords" content="TheZZAZZglitch tactical showdown tacticalshowdown april fools 2020 fools2020 ctf hacking binary glitch bug pokémon first gen red binary rom savefile customrom game mod play  register account free sign in signin mporg turn based fight">
+<meta name="robots" content="index, follow">
+<meta name="language" content="EN">
+<meta name="rating" content="general">
+<link href="https://fools2020.stranck.ovh" rel="home">
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
+
+<script src="bootstrap/jquery-3.1.0.min.js"></script>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src='script.js'></script>
+<script>
+
+    function register(e){
+        //loaderStart(e, []);
+        var req = $.post(API_SERVER + "/register/", {
+            "username": $("#username").val(),
+            "password": $("#pass1").val(),
+            "password2": $("#pass2").val()
+        });
+        req.fail(function(){
+            modalMessage("Could not connect to the event server. Try again in a few minutes.");
+            loaderFinish();
+        });
+        req.done(function(x){
+            if (x['error'] == 0){
+                //modalMessageWithRedirect("Registration was successful. You can log in now.", "login.html");
+                alert("User registered successfully. Welcome into fools2020 dude!");
+                window.location.href = "/";
+            }else{
+                alert("ERROR:\n" + x['message']);
+                //modalMessage("An error occured: " + x['message']);
+                //loaderFinish();
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        PkSpr.process_dom();
+    });
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Fools2020</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            {% if g.session.username %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Play</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Inventory (0)</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Reports (0)</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Rankings</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out ({{ g.session.username }})</a></li>
+            {% else %}
+                <!--li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log In</a></li-->
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="https://fools2018.stranck.ovh">Fools2018</a></li>
+            <li class="nav-item"><a class="nav-link" href="https://fools2019.stranck.ovh">Fools2019</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="navbar-spacing"></div>
+
+<div id="content">
+    <div class="f-container panel panel-default">
+        <div class="f-category">
+            <b>Create a new account</b>
+        </div>
+        <div class="f-inside-padded">
+            <p>So you're up to the challenge? Choose your username and set your password. Make sure you remember it, passwords cannot be reset or changed.</p>
+            <input type='text' class='form-control f-form-field' placeholder='Your username (max 15 characters)' maxlength="20" id='username'>
+            <input type='password' class='form-control f-form-field' placeholder='Your password (mix 7 characters)' id='pass1'>
+            <input type='password' class='form-control f-form-field' placeholder='Repeat your password' id='pass2'>
+            <br><br>
+            <div class='register-notes'>
+                <p>&bull; We reserve the right to remove your account and all of its associated records at any time, for any reason. We probably won't, but we might.</p>
+                <p>&bull; The game contains user-provided content. We are not responsible for any content provided by the players. We might remove any politically extreme, pornographic, illegal or otherwise unethical content at our discretion. We probably won't, but we might.</p>
+                <p>&bull; The game contains several optional hacking challenges. However, hacking the event site and server themselves are not part of the challenge. Any uncreative hacking attempts that purely aim to ruin the fun for everyone (denial of service attacks, erasing scores of other people, stealing user data, etc.) will result in account termination, permanent blocking of associated IP addresses, or in extreme cases - legal action.</p>
+                <p>&bull; The only real rule is: don't be a douche. Respect that, and you're good to go!</p>
+            </div>
+            <button class="btn btn-success" onclick="register(this)">
+                Register
+            </button>
+        </div>
+    </div>
+</div>

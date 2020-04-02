@@ -1,0 +1,55 @@
+.navbar-nav .nav-item:not(:last-child) {
+   border-right: 1px solid #888;
+}
+
+.navbar-nav .nav-item {
+    font-size: 24px;
+   padding-left: 5px;
+   padding-right: 5px;
+}
+.navbar-brand {
+    font-size: 28px;
+}
+
+.f-form-field {
+    margin-bottom: 10px;
+}
+
+
+html {
+    font-size: 16px;
+    line-height: normal;
+}
+
+body {
+    background: url('/static/bg.png');
+    background-attachment: fixed;
+}
+
+.j-container {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #999;
+}
+
+.j-container-mult {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.j-container-mult td {
+    width: 25%;
+    padding: 16px;
+}
+
+.j-tally {
+    display: block;
+    font-size: 25px;
+}
+
+.j-explain {
+    font-size: 10px;
+    line-height: 15px;
+}

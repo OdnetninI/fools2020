@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Tactical Showdown - TheZZAZZGlitch's April Fools Event 2020</title>
+
+<meta name="description" content="TACTICAL SHOWDOWN: TheZZAZZglitch's April Fools event 2020. The original event hasn't never been completed. We're trying to create our own event based on what TheZZAZZGlitch leaved us">
+<meta name="keywords" content="TheZZAZZglitch tactical showdown tacticalshowdown april fools 2020 fools2020 ctf hacking binary glitch bug pokémon first gen red binary rom savefile customrom game mod play home homepage mporg turn based fight">
+<meta name="robots" content="index, follow">
+<meta name="language" content="EN">
+<meta name="rating" content="general">
+<link href="https://fools2020.stranck.ovh" rel="home">
+
+<script src="bootstrap/jquery-3.1.0.min.js"></script>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="/script.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Fools2020</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            {% if g.session.username %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Play</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Inventory (0)</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Reports (0)</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('bepis') }}">Rankings</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out ({{ g.session.username }})</a></li>
+            {% else %}
+                <!--li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log In</a></li-->
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="https://fools2018.stranck.ovh">Fools2018</a></li>
+            <li class="nav-item"><a class="nav-link" href="https://fools2019.stranck.ovh">Fools2019</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="j-container j-container-mult">
+<table style="width:100%">
+<tr><td>
+    Incoming encounters:
+    <span class="j-tally">0</span>
+    <span class="j-explain">Players might challenge you to a battle. Attacks arrive after some amount of time, giving you a chance to prepare. Go to the <a href='#'>Battle</a> tab to challenge other players!</span>
+</td><td>
+    Battle Points:
+    <span class="j-tally">69</span>
+    <span class="j-explain">The measure of your battle prowess. Play the game and defeat other players to earn Battle Points and climb <a href="#">the ranking</a>.</span>
+</td><td>
+    Credits:
+    <span class="j-tally">69</span>
+    <span class="j-explain">Earn credits by playing the game and winning battles. Spend credits to <a href="#">buy components</a> and create <a href="#">powerful items</a> to help you become stronger.</span>
+</td><td>
+    Score:
+    <span class="j-tally">69</span>
+    <span class="j-explain">Secure your position on <a href="#">the leaderboard</a> by completing in-game quests, obtaining <a href="#">achievements</a> and increasing your score.</span>
+</td></tr>
+</table>
+</div>
+
+<div class="j-container j-container-mult">
+    <p>Are you ready for a brand new adventure?<br>
+    Start playing immediately in any HTML5-compatible browser without any further setup, or download this <a href="fools2020.sav" target="_blank">Pokémon Red save file</a> and load it in BGB.
+    Don't forget to download also the <a href="Fools2020-Desktop-Client.exe" target="_blank">desktop client</a>!
+    Any problems? Contact me on: <a href='https://t.me/LucaStranck'>Telegram</a>, <a href='https://instagram.com/stranck'>Instragram</a> or <a href='https://twitter.com/LStranck'>Twitter</a>.</p>
+    <button class="btn btn-primary" onclick='window.location="online/"'>
+        Play online in your browser
+    </button> &nbsp;
+    <button class="btn btn-primary" onclick='window.location="desktop/"'>
+        Instructions for BGB emulator
+    </button>
+    <br>
+    <p>
+        <h2>
+            This is an unofficial server of fools2020.
+        </h2>
+        <h3>
+            The original challenge hasn't been completed yet by TheZZAZZglitch.<br>
+            Here's the message he leaved to us:
+        </h3>
+        <i>
+            <br>I'm sorry to say that despite my best efforts, I was not able to finish and release Fools2020 in time. Many things have contributed to this state of affairs - busy schedule, overall shortage of development time and resources, organizational problems, big changes in life and mental health issues, and the final nail in the coffin: the recent COVID-19 outbreak.
+            <br>Because of the unstable development cycle and volatile requirements, the project has become a hard to maintain mess of spaghetti code. Everything is still heavily unfinished and hardly working, and many things would have to be redone from scratch.
+            <br>However, it would be a huge waste to just throw everything away. I decided to release whatever I was able to make, completed or not, so the community can still have fun together. Everything is uploaded in raw form, with everything uncut.
+            <br>Try to compile and see things running. Look for unused stuff. Imagine what the project could have been. Look through the source, insert some NotLikeThis comments. Investigate everything. Or even finish what I started. Maybe some day I will be able to see Fools2020 not as the creator, but as a participant.    
+        </i>
+        <br><br>
+        You can find the original message and the official repository of fools2020 <a target="_blank" href="https://zzazzdzz.github.io/fools2020/">here</a>.
+        <br>We - as a communnity - are trying to mantain the original code, and making it workable for everyone. You can find our repository <a target="_blank" href="https://github.com/OdnetninI/fools2020">here</a>
+        <br>
+        <font size="1" color=#e0e0e0>Uhm, hey, TheZZAZZglitch... I hope that you're ending up reading this one day...
+            I really hope that everything is starting to going ok, I really hope that all of this caused you too much stress, I really hope to hear you again soon.
+            I wish we all could do more to help you more. Be nice and thank you for all the effort you've put thru all the years. You've changed the life of all of us.
+        </font> 
+    </p>
+</div>
