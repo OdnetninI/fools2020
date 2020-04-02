@@ -14,9 +14,20 @@ def hello():
     g.session = session
     return render_template("base.html")
 
+
+@app.route('/register')
+def register():
+    g.session = session
+    return render_template("register.html")
+
 @app.route('/login')
 def login():
-    session["username"] = "bepis"
+    g.session = session
+    return render_template("static_login.html")
+
+@app.route('/logout')
+def logout():
+    session["username"] = ""
     return "OK"
 
 @app.route('/bepis')
@@ -24,4 +35,4 @@ def bepis():
     return "bepis"
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=20110)

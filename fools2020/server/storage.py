@@ -26,6 +26,12 @@ def sql_readonly(query, params=(), log_errors=True):
         ret.append(dict(i))
     return ret
 
+def get_user_data(x):
+    result = sql("SELECT * FROM users WHERE username=?", (x,))
+    if not result:
+        return None
+    return result[0]
+
 def get_player_data(x):
     result = sql("SELECT * FROM users WHERE sessid=?", (x,))
     if not result:

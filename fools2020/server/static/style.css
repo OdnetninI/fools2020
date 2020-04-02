@@ -3,12 +3,27 @@
 }
 
 .navbar-nav .nav-item {
+    font-size: 24px;
    padding-left: 5px;
    padding-right: 5px;
+}
+.navbar-brand {
+    font-size: 28px;
+}
+
+.f-form-field {
+    margin-bottom: 10px;
+}
+
+
+html {
+    font-size: 16px;
+    line-height: normal;
 }
 
 body {
     background: url('/static/bg.png');
+    background-attachment: fixed;
 }
 
 .j-container {

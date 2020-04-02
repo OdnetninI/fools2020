@@ -19,10 +19,11 @@ commands = {
     "closetext": (0x08,),
     "delay": (0x09, 1),
     "opentext": (0x0a,),
+    "iffalse": (0x0b, 2)
 }
 
 def find_script_file(idx):
-    candidates = glob.glob(SCRIPT_PATH + "%.4x*.txt" % idx)
+    candidates = glob.glob(SCRIPT_PATH + ("%.4x" % idx).upper() + "*.txt")
     if len(candidates) > 1:
         raise RuntimeError("more than 1 map with specific identifier?")
     if not candidates:
@@ -37,6 +38,7 @@ SAMPLE_PLAYER = {
 
 def load_script(identifier, player_data=SAMPLE_PLAYER):
     fname = find_script_file(identifier)
+    print("Name obtained: ", fname)
     out = []
     symbols = {"SCRIPT_ID": identifier}
     current_offset = 0

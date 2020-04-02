@@ -1,6 +1,8 @@
+import json
 import hashlib
 import binascii
 import os
+import storage
 
 import consts
 
@@ -8,6 +10,9 @@ def get_raw_post(environ):
     data_len = int(environ.get('CONTENT_LENGTH', 0))
     data = environ['wsgi.input'].read(data_len)
     return data
+
+def json_bytes(x):
+    return bytes(json.dumps(x), 'utf-8')
 
 def gen_keybytes(key, sz):
     varA = key % 256
@@ -109,9 +114,36 @@ def bcd(x):
     x16h = x16 // 256
     return (x16h, x16l)
 
-# yep this hashing is shit :/
-def password_hash(x):
-    return hashlib.sha256(bytes(x, 'utf-8') + b"ew90v9mwc0mei0wfojief-d0wfjiwefew").hexdigest()
+
+PEPPER = b"ew90v9mwc0mei0wfojief-d0wfjiwefew"
+SALT_SIZE = 16
+
+def checkUserLogin(user, password):
+    q = storage.sql("select * from users where username=?", (user,))
+    if q:
+        q = q[0]
+        pw = q["password"].split("$")
+        #print("0", pw[0])
+        #print("1", pw[1])
+        #print("q", q["password"])
+        h = password_hash(password, salt=pw[0])
+        #print("h", h)
+        if(h == q["password"]):
+            #print("CORRECT")
+            print("Login confirmed for user", user)
+            return q
+    print("Login failed for user", user)
+    return None
+
+# don't worry TheZZAZZglitch-sempai we're here to help you! <3
+def password_hash(x, salt=None):
+    if(salt == None):
+        salt = os.urandom(SALT_SIZE)
+    else:
+        salt = bytes.fromhex(salt)
+    #print("salt:", salt.hex())
+    #print("--pw:", x)
+    return salt.hex() + "$" + hashlib.pbkdf2_hmac('sha256', bytes(x, 'utf-8') + PEPPER, salt, 100000).hex()
 
 def new_session_key():
     return binascii.hexlify(os.urandom(64)).decode('ascii')

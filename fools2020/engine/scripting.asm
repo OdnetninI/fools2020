@@ -55,6 +55,7 @@ NPCScriptJumptable:
     dw NPCScript_Closetext
     dw NPCScript_Delay
     dw NPCScript_Opentext
+    dw NPCScript_IfFalse
 
 NPCScript_TextBox:
     pop hl
@@ -100,10 +101,11 @@ NPCScript_IfTrue:
     inc hl
     jr InterpretNPCScript
 
+
 NPCScript_Waitbutton:
     pop hl
     call WaitButtonPress
-    jr InterpretNPCScript
+    jp InterpretNPCScript
 
 NPCScript_Beginbattle:
     pop hl
@@ -116,7 +118,7 @@ NPCScript_Beginbattle:
     push hl
     call BeginBattle
     pop hl
-    jr InterpretNPCScript
+    jp InterpretNPCScript
 
 NPCScript_Closetext:
     call ReturnFromTextboxToOverworld
@@ -148,6 +150,23 @@ NPCScript_Delay:
 NPCScript_Opentext:
     call TextboxEnable
     pop hl
+    jp InterpretNPCScript
+
+NPCScript_IfFalse:
+    pop hl
+    ld a, [wScriptVar]
+    and a
+    jr nz, .skip
+    call ReadFromSRA0
+    ld d, a
+    inc hl
+    call ReadFromSRA0
+    ld h, a
+    ld l, d
+    jp InterpretNPCScript
+.skip
+    inc hl
+    inc hl
     jp InterpretNPCScript
 
 NPCScript_Callscript:

@@ -1,6 +1,11 @@
+import os
 import json
 import base64
 import random
+import re
+import urllib.parse
+
+import wsgiref.util
 
 import router
 import util
@@ -60,19 +65,69 @@ def appRequest(environ, start_response):
     ]) + response
     return [base64.b64encode(data)]
 
+@rt.route("^/register/$")
+def appRequest(environ, start_response):
+    #print("ASD")
+    data_len = int(environ.get('CONTENT_LENGTH', 0))
+    data = urllib.parse.parse_qs(environ['wsgi.input'].read(data_len).decode('utf-8'), keep_blank_values=True)
+    #print(data)
+
+    user = storage.get_user_data(data['username'][0])
+    if user:
+        start_response('200 OK', HEADERS_JSON + HEADERS_CORS)
+        return [util.json_bytes({'error': 2, 'message': 'Username already exists.'})]
+    if not re.match('^[A-Za-z0-9]{1,15}$', data['username'][0]):
+        start_response('200 OK', HEADERS_JSON + HEADERS_CORS)
+        return [util.json_bytes({'error': 4, 'message': 'Invalid username.'})]
+    if len(data['password'][0]) < 7:
+        start_response('200 OK', HEADERS_JSON + HEADERS_CORS)
+        return [util.json_bytes({'error': 4, 'message': 'Password should be at least 7 characters long.'})]
+    
+    storage.sql('''
+        INSERT INTO users (username, password, mon) VALUES (?, ?, ?)
+    ''', (
+        data['username'][0],
+        util.password_hash(data['password'][0]),
+        '{"species": "CHARMANDER", "mon_name": "Shadow", "moves": ["SCRATCH"], "name": "X", "items": [1,2,3,4,0,0,0,0]}'
+    ))
+    
+    user = storage.get_user_data(data['username'][0])
+    key = util.new_session_key()
+    storage.sql('''
+        UPDATE users SET sessid=? WHERE id=?
+    ''', (key, user['id']))
+    
+    print("New user!", user['username'])
+    start_response('200 OK', HEADERS_JSON + HEADERS_CORS)
+    return [util.json_bytes({'error': 0, 'message': 'OK'})]
+
 @rt.route("^/login/")
 def appRequest(environ, start_response):
+    #print("LOGIN")
+    start_response('200 OK', HEADERS_JSON + HEADERS_CORS)
+    data_len = int(environ.get('CONTENT_LENGTH', 0))
+    data = urllib.parse.parse_qs(environ['wsgi.input'].read(data_len).decode('utf-8'), keep_blank_values=True)
+    username = data['username'][0]
+    password = data['password'][0]
+    q =  util.checkUserLogin(username, password)
+    if q != None:
+        sessid = util.new_session_key()
+        storage.sql("update users set sessid=? where id=?", (sessid, q["id"]))
+        return [util.json_bytes({'error': 0, 'sessid': sessid})]
+    else:
+        return [util.json_bytes({'error': 1, 'message': 'Invalid username and/or password.'})]
+
+@rt.route("^/relogin/")
+def appRequest(environ, start_response):
+    #print("RELOGIN")
     start_response('200 OK', HEADERS_CORS, HEADERS_TEXT)
     credentials = util.get_raw_post(environ).split(b"|")
     username = base64.b64decode(credentials[0]).decode("utf-8")
-    password = util.password_hash(base64.b64decode(credentials[1]).decode("utf-8"))
-    q = storage.sql("select id from users where username=? and password=?", (username, password))
-    if q:
-        sessid = util.new_session_key()
-        storage.sql("update users set sessid=? where id=?", (sessid, q[0]["id"]))
+    password = base64.b64decode(credentials[1]).decode("utf-8")
+    q = util.checkUserLogin(username, password)
+    if q != None:
+        sessid = q["sessid"]
         return [bytes(sessid, "ascii")]
-    else:
-        return [b"INVAL"]
 
 @rt.route("^.*$")
 def appDefault(environ, start_response):
@@ -85,4 +140,5 @@ def appDefault(environ, start_response):
 if __name__ == "__main__":
     import wsgiserver
     server = wsgiserver.WSGIServer(rt, host='127.0.0.1', port=20111)
+    print("Starting")
     server.start()

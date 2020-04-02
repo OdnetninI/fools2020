@@ -86,7 +86,7 @@ for i in range(0x6001, 0x8000):
 insert_at(0x6000, [checksum])
 
 print("writing save...")
-with open('fools.sav', 'wb') as fp:
+with open('server/site/fools2020.sav', 'wb') as fp:
     fp.write(save)
 
 print("writing bgb savestate...")
