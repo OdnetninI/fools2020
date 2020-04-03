@@ -1,11 +1,20 @@
-
-RunNPCScript:
-    ld hl, wCurTextIDs
+RunNPCScript: ;F08c3d874f0600092a666f $4911 -> $A911
+;The code that was there before was loading a textID equals to the objectID.
+;This should have fixed this issue, hoping that this is what it was originally intended
+    ld hl, wMapSpriteData
+    inc hl
     ldh a, [$8c]
     dec a
     add a
     ld c, a
     ld b, 0
+    add hl, bc
+    ld a, [hl]
+    dec a
+    add a
+    ld c, a
+    ld b, 0
+    ld hl, wCurTextIDs
     add hl, bc
     ld a, [hli]
     ld h, [hl]

@@ -128,7 +128,7 @@ LoadCurrentMap:
 	ld e, a
     dec c
     jr nz, .loadSpriteData1
-    ld de, wMapSpriteData
+    ld de, wMapSpriteData ;$A63E
 .loadSpriteData2
     ld a, [hli] ; movement byte 2
     ld [de], a
