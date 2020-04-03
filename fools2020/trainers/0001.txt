@@ -1,6 +1,6 @@
 [Trainer]
 Name = McDick Fartface
-Class = RIVAL1
+Class = POKEMANIAC
 RewardBP = 1
 RewardCredits = 10
 MonSpecies = SQUIRTLE
