@@ -7,13 +7,13 @@ MonSpecies = SQUIRTLE
 
 [Moveset]
 Move1 = TACKLE
-Move2 = GROWL
+Move2 = .
 Move3 = .
 Move4 = .
 
 [Tactics]
 DefaultMove = 1
-OpeningMove = 2
+OpeningMove = 1
 OnLowHealth = 1
 OnOwnStatusEffect = 0
 OnEnemyLowHealth = 1
