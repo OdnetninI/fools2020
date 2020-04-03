@@ -31,7 +31,7 @@ textid = 0x02
 [Sign_1]
 x = 4
 y = 4
-textid = 0x03
+textid = 0x01
 
 [Object_0]
 pictureid = SPRITE_LASS
@@ -41,10 +41,26 @@ movement = STAY
 movementpattern = NONE
 textid = 0x01
 
+[Object_1]
+pictureid = SPRITE_LASS
+x = 5
+y = 6
+movement = STAY
+movementpattern = NONE
+textid = 0x02
+[Object_2]
+pictureid = SPRITE_LASS
+x = 4
+y = 6
+movement = STAY
+movementpattern = NONE
+textid = 0x01
+
 [TextPointers]
 text1 = 0xfea0
 text2 = 0xfea1
 text3 = 0xfea2
+text4 = 0xfea3
 
 [Sources]
 blocks = 0101_TestMap.blk

@@ -59,6 +59,7 @@ def load_map(identifier, player_data):
             const_int(config["Object_%i" % i]["MovementPattern"]),
             const_int(config["Object_%i" % i]["TextID"])
         ]
+        print("TBOX", i, const_int(config["Object_%i" % i]["TextID"]), len(compiled_objs))
     for direction in ("North", "South", "West", "East"):
         if direction not in config["Connections"]:
             continue
@@ -76,6 +77,7 @@ def load_map(identifier, player_data):
             lobyte(tid),
             hibyte(tid)
         ]
+        print("TPTR", i, const_int(config["TextPointers"]["Text%i" % (i+1)]))
     if "Blocks" in config["Sources"]:
         with open(MAP_PATH + config["Sources"]["Blocks"], "rb") as f:
             compiled_blockdata = list(f.read())
