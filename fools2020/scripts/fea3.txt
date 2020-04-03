@@ -1,0 +1,47 @@
+
+FEA3:
+    textbox Intro
+    yesno
+    iftrue FEA3_OnTrue
+    textbox IfFalse
+    waitbutton
+    textbox PreBattleText
+    waitbutton
+    startbattle 0x0001
+    textbox PostBattleText
+    end
+FEA3_OnTrue:
+    textbox IfTrue
+    waitbutton
+    textbox PreBattleText
+    waitbutton
+    startbattle 0x0001
+    textbox PostBattleText
+    end
+
+textbox Intro {
+    Yo, what's your name?
+}
+
+textbox IfFalse {
+    No?
+    That doesn't make
+    any sense...
+}
+
+textbox IfTrue {
+    Yes?
+    That doesn't make
+    any sense...
+}
+
+textbox PreBattleText {
+    Whatever, you're my rival now.
+    Prepare to lose!
+}
+
+textbox PostBattleText {
+    Hmmph, not sure why
+    I even bothered to
+    fight you.
+}

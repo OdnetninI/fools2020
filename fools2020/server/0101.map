@@ -21,6 +21,7 @@ ConnectionPreview = 0101.rs
 [TextPointers]
 Text1 = 0x1234
 Text2 = 0xfeed
+Text4 = 0x0001
 
 [Warp_0]
 X = 7
