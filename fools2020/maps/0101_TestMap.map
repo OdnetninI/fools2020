@@ -49,6 +49,13 @@ movement = STAY
 movementpattern = NONE
 textid = 0x04
 
+[Object_2]
+pictureid = SPRITE_BALL
+x = 6
+y = 6
+movement = STAY
+movementpattern = NONE
+textid = 0x03
 
 [TextPointers]
 text1 = 0xfea0

@@ -50,7 +50,7 @@ def const_int(x):
         return int("%s" % x[2:], 16)
     if x in consts.CONSTS:
         return consts.CONSTS[x]
-    return int(x)
+    return int(x) #This is probably useless, but I don't want to fuck with stuff that worksTM
 
 def lobyte(x):
     return x & 0xff
@@ -66,6 +66,12 @@ with open(CHARMAP_FILE, "r") as f:
         if i.startswith("charmap"):
             d = [x.strip() for x in i[8:].split(", ")]
             charmap[d[0][1:-1].replace("\\", "")] = const_int(d[1])
+
+def parse_bytes(bs):
+    out = []
+    for b in bs:
+        out.append(const_int(b) & 0xff) 
+    return out
 
 def parse_textbox(txt):
     out = []

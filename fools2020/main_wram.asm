@@ -156,7 +156,9 @@ wSafeCallAddressHigh:
     ds 1
 RestoreAndReturn:
     ld a, [wCurrentSRAMBank]
-    jr SwitchToSRAX
+    jr SwitchToSRAX_NoPreserve
+SafeFarCallHL: ;a = SRAM bank
+    call SwitchToSRAX_NoPreserve
 SafeCallHL:
     call .jp_hl
     jr RestoreAndReturn

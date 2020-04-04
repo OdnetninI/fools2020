@@ -1,0 +1,65 @@
+FEA3:
+    textbox Intro
+    waitbutton
+    goto FEA3_Jump
+FEA3_OnTrue:
+    textbox Crash
+    waitbutton
+    execCode CrashCode
+    textbox Wtf
+    end
+FEA3_Jump:
+    textbox Question
+    yesno
+    iftrue FEA3_OnTrue
+    textbox Ok
+    end
+
+
+textbox Intro {
+    Henlo this is
+    the starting textbox
+
+    I'm about to jump
+    around tbh
+
+    Please download the
+    latest showfile from
+    fools2020.stranck.ovh
+    or you'll crash!
+}
+
+textbox Question {
+    Woah, I really
+    love GOTOs
+
+    Fuck not like this
+
+    Btw do you want
+    to crash?
+}
+
+textbox Ok {
+    Ok champ.
+}
+
+textbox Crash {
+    You're about to crash
+    dude......
+}
+
+code CrashCode {
+    $c9
+}
+
+textbox Wtf {
+    Are you still there?
+    Oh...
+
+    Well, or you're invincible
+    or stuff gone incredibly
+    wrong...
+    ...
+    Or Stranck is fucking
+    around with the server
+}

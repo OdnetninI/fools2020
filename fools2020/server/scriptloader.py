@@ -1,9 +1,10 @@
 import glob
 import random
 
-from util import const_int, lobyte, hibyte, parse_textbox
+from util import const_int, lobyte, hibyte, parse_textbox, parse_bytes
 from copy import deepcopy
 
+COMMENT_CHARS = "###"
 SCRIPT_PATH = "../scripts/"
 SCRIPT_BASE = 0xa5a0
 
@@ -19,7 +20,9 @@ commands = {
     "closetext": (0x08,),
     "delay": (0x09, 1),
     "opentext": (0x0a,),
-    "iffalse": (0x0b, 2)
+    "iffalse": (0x0b, 2),
+    "execCode": (0x0c, 2),
+    "goto": (0x0d, 2)
 }
 
 def find_script_file(idx):
@@ -44,12 +47,14 @@ def load_script(identifier, player_data=SAMPLE_PLAYER):
     current_offset = 0
     mode = "script"
     cur_txt = []
+    cur_code = []
     filtered_lines = []
     ignore = False
     depth = 0
     with open(fname, "r") as fp:
         lines = [x.replace("%SCRIPT_ID%", "%.4X" % identifier) for x in fp.readlines()]
         for l in lines:
+            l = l.split(COMMENT_CHARS)[0]
             args = l.strip().split(" ")
             if args[-1].endswith("{"):
                 depth += 1
@@ -80,6 +85,7 @@ def load_script(identifier, player_data=SAMPLE_PLAYER):
                 filtered_lines.append(l)
         lines = filtered_lines
         for l in lines:
+            l = l.split(COMMENT_CHARS)[0]
             args = l.strip().split(" ")
             if mode == "script":
                 if args[0].endswith(":"):
@@ -87,6 +93,7 @@ def load_script(identifier, player_data=SAMPLE_PLAYER):
                 elif args[-1].endswith("{"):
                     mode = args[0]
                     cur_txt = []
+                    cur_code = []
                     symbols[args[1]] = SCRIPT_BASE + current_offset
                 elif args[-1].endswith("{"):
                     continue
@@ -94,6 +101,7 @@ def load_script(identifier, player_data=SAMPLE_PLAYER):
                     continue
                 else:
                     if args[0] not in commands:
+                        print("Commands", commands)
                         raise RuntimeError("undefined script cmd %s" % args[0])
                     current_offset += sum(commands[args[0]][1:]) + 1
             elif mode == "effects":
@@ -121,9 +129,16 @@ def load_script(identifier, player_data=SAMPLE_PLAYER):
                     current_offset += len(parse_textbox(cur_txt))
                 else:
                     cur_txt.append(l.strip())
+            elif mode == "code":
+                if args[0].endswith("}"):
+                    mode = "script"
+                    current_offset += len(cur_code)
+                else:
+                    cur_code += l.split()
             else:
                 raise RuntimeError("unknown scripting mode %s" % mode)
         for l in lines:
+            l = l.split(COMMENT_CHARS)[0]
             args = l.strip().split(" ")
             # print(args, mode)
             if mode == "script":
@@ -132,6 +147,7 @@ def load_script(identifier, player_data=SAMPLE_PLAYER):
                 elif args[-1].endswith("{"):
                     mode = args[0]
                     cur_txt = []
+                    cur_code = []
                 else:
                     if args[0] not in commands:
                         raise RuntimeError("undefined script cmd %s" % args[0])
@@ -158,6 +174,13 @@ def load_script(identifier, player_data=SAMPLE_PLAYER):
                     out += parse_textbox(cur_txt)
                 else:
                     cur_txt.append(l.strip())
+            elif mode == "code":
+                if args[0].endswith("}"):
+                    mode = "script"
+                    out += parse_bytes(cur_code)
+                    print(out)
+                else:
+                    cur_code += l.split()
             else:
                 raise RuntimeError("unknown scripting mode %s" % mode)
     print(out)

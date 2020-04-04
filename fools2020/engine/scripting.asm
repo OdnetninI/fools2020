@@ -40,7 +40,7 @@ RunNPCScriptHL:
     ; fall through to InterpretNPCScript
 
 InterpretNPCScript:
-    call ReadFromSRA0
+    call ReadFromSRA0 ;A94B
     inc hl
     push hl
     ld hl, NPCScriptJumptable - 2
@@ -65,6 +65,8 @@ NPCScriptJumptable:
     dw NPCScript_Delay
     dw NPCScript_Opentext
     dw NPCScript_IfFalse
+    dw NPCScript_ExecCode
+    dw NPCScript_Goto
 
 NPCScript_TextBox:
     pop hl
@@ -187,6 +189,32 @@ NPCScript_Callscript:
     ld h, a
     ld l, d
     jp RunNPCScriptHL
+
+NPCScript_ExecCode:
+    pop hl
+    call ReadFromSRA0
+    ld e, a
+    inc hl
+    call ReadFromSRA0
+    ld d, a
+    push hl
+    ld h, d
+    ld l, e
+    xor a
+    call SafeFarCallHL
+    pop hl
+    inc hl
+    jp InterpretNPCScript
+
+NPCScript_Goto:
+    pop hl
+    call ReadFromSRA0
+    ld d, a
+    inc hl
+    call ReadFromSRA0
+    ld h, a
+    ld l, d
+    jp InterpretNPCScript
 
 NPCScript_End:
     pop hl
