@@ -77,26 +77,27 @@
 </nav>
 <div class="navbar-spacing"></div>
 
-<div id="content">
-    <div class="f-container panel panel-default">
-        <div class="f-category">
-            <b>Create a new account</b>
+<div class="j-container j-container-mult">
+    <div class="f-category">
+        <b>Create a new account</b>
+    </div>
+    <div class="f-inside-padded">
+        <p>So you're up to the challenge? Choose your username and set your password. Make sure you remember it, passwords cannot be reset or changed.</p>
+        <input type='text' class='form-control f-form-field' placeholder='Your username (max 15 characters)' maxlength="20" id='username'>
+        <input type='password' class='form-control f-form-field' placeholder='Your password (min 7 characters)' id='pass1'>
+        <input type='password' class='form-control f-form-field' placeholder='Repeat your password' id='pass2'>
+        <br><br>
+        <div class='register-notes'>
+            <p>&bull; We reserve the right to remove your account and all of its associated records at any time, for any reason. We probably won't, but we might.</p>
+            <p>&bull; The game contains user-provided content. We are not responsible for any content provided by the players. We might remove any politically extreme, pornographic, illegal or otherwise unethical content at our discretion. We probably won't, but we might.</p>
+            <p>&bull; The game contains several optional hacking challenges. However, hacking the event site and server themselves are not part of the challenge. Any uncreative hacking attempts that purely aim to ruin the fun for everyone (denial of service attacks, erasing scores of other people, stealing user data, etc.) will result in account termination, permanent blocking of associated IP addresses, or in extreme cases - legal action.</p>
+            <p>&bull; The only real rule is: don't be a douche. Respect that, and you're good to go!</p>
         </div>
-        <div class="f-inside-padded">
-            <p>So you're up to the challenge? Choose your username and set your password. Make sure you remember it, passwords cannot be reset or changed.</p>
-            <input type='text' class='form-control f-form-field' placeholder='Your username (max 15 characters)' maxlength="20" id='username'>
-            <input type='password' class='form-control f-form-field' placeholder='Your password (mix 7 characters)' id='pass1'>
-            <input type='password' class='form-control f-form-field' placeholder='Repeat your password' id='pass2'>
-            <br><br>
-            <div class='register-notes'>
-                <p>&bull; We reserve the right to remove your account and all of its associated records at any time, for any reason. We probably won't, but we might.</p>
-                <p>&bull; The game contains user-provided content. We are not responsible for any content provided by the players. We might remove any politically extreme, pornographic, illegal or otherwise unethical content at our discretion. We probably won't, but we might.</p>
-                <p>&bull; The game contains several optional hacking challenges. However, hacking the event site and server themselves are not part of the challenge. Any uncreative hacking attempts that purely aim to ruin the fun for everyone (denial of service attacks, erasing scores of other people, stealing user data, etc.) will result in account termination, permanent blocking of associated IP addresses, or in extreme cases - legal action.</p>
-                <p>&bull; The only real rule is: don't be a douche. Respect that, and you're good to go!</p>
-            </div>
-            <button class="btn btn-success" onclick="register(this)">
-                Register
-            </button>
-        </div>
+		
+		<!-- TODO: Add reCAPCHA here. -->
+		
+        <button class="btn btn-success" onclick="register(this)">
+            Register
+        </button>
     </div>
 </div>
