@@ -53,3 +53,11 @@ body {
     font-size: 10px;
     line-height: 15px;
 }
+
+.register-notes {
+	padding: 8px;
+	background: #ffc;
+	font-size: 12px;
+	text-align: center;
+	margin-bottom: 15px;
+}
